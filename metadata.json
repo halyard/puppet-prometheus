@@ -1,0 +1,16 @@
+{
+  "name": "halyard-prometheus",
+  "version": "0.0.1",
+  "author": "Les Aker",
+  "license": "MIT",
+  "summary": "Configure system prometheus",
+  "source": "https://github.com/halyard/puppet-prometheus",
+  "project_page": "https://github.com/halyard/puppet-prometheus",
+  "issues_url": "https://github.com/halyard/puppet-prometheus/issues",
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+
+  ]
+}
