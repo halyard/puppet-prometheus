@@ -1,0 +1,9 @@
+<% targets = scope.call_function('configvault_list', ['prometheus/node']) -%>
+<% if targets.empty? -%>
+- targets: []
+<% else -%>
+- targets:
+<% targets.each do |target| -%>
+  - <%= target %>:9100
+<% end -%>
+<% end -%>

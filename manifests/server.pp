@@ -12,12 +12,28 @@ class prometheus::server (
 ) {
   package { 'prometheus': }
 
-  -> file { '/etc/conf.d/prometheus':
-    ensure => file,
-    source => 'puppet:///modules/prometheus/conf',
+  file { '/etc/conf.d/prometheus':
+    ensure  => file,
+    source  => 'puppet:///modules/prometheus/conf',
+    require => Package['prometheus'],
+    notify  => Service['prometheus'],
   }
 
-  ~> service { 'prometheus':
+  file { '/etc/prometheus/prometheus.yml':
+    ensure  => file,
+    content => template('prometheus/prometheus.yml'),
+    require => Package['prometheus'],
+    notify  => Service['prometheus'],
+  }
+
+  file { '/etc/prometheus/servers_node.yml':
+    ensure  => file,
+    content => template('prometheus/servers_node.yml'),
+    require => Package['prometheus'],
+    notify  => Service['prometheus'],
+  }
+
+  service { 'prometheus':
     ensure => running,
     enable => true,
   }
