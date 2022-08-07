@@ -1,6 +1,8 @@
 # @summary Configure node exporter
 #
 class prometheus::client::node {
+  include prometheus
+
   package { 'prometheus-node-exporter': }
 
   -> service { 'prometheus-node-exporter':
