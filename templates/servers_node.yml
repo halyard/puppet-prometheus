@@ -4,6 +4,6 @@
 <% else -%>
 - targets:
 <% targets.each do |target| -%>
-  - <%= scope.call_function('configvault_read', ['prometheus/node', true, nil, target]) %>:9100
+  - <%= scope.call_function('configvault_read', ['prometheus/node', true, 'FAIL', target]) %>:9100
 <% end -%>
 <% end -%>
