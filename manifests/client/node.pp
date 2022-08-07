@@ -11,7 +11,7 @@ class prometheus::client::node {
   }
 
   Configvault_Write { 'prometheus/node':
-    source => '/etc/hostname',
+    source => '/etc/identifier',
     public => true,
   }
 
