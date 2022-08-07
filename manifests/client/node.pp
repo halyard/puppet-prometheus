@@ -8,9 +8,9 @@ class prometheus::client::node {
     enable => true,
   }
 
-  Configvault_Write { "prometheus/node":
+  Configvault_Write { 'prometheus/node':
     source => '/etc/hostname',
-    public => true
+    public => true,
   }
 
   firewall { '100 allow prometheus node metrics':
