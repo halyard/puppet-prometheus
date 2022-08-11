@@ -5,6 +5,11 @@ class prometheus::client::systemd {
 
   package { 'prometheus-systemd-exporter': }
 
+  -> file { '/etc/conf.d/prometheus-systemd-exporter':
+    ensure  => file,
+    content => 'SYSTEMD_EXPORTER_ARGS="--systemd.collector.enable-restart-count"',
+  }
+
   -> service { 'prometheus-systemd-exporter':
     ensure => running,
     enable => true,
