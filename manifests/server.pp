@@ -21,21 +21,28 @@ class prometheus::server (
 
   file { '/etc/prometheus/prometheus.yml':
     ensure  => file,
-    content => template('prometheus/prometheus.yml'),
+    content => template('prometheus/prometheus.yml.erb'),
     require => Package['prometheus'],
     notify  => Service['prometheus'],
   }
 
   file { '/etc/prometheus/servers_node.yml':
     ensure  => file,
-    content => template('prometheus/servers_node.yml'),
+    content => template('prometheus/servers_node.yml.erb'),
     require => Package['prometheus'],
     notify  => Service['prometheus'],
   }
 
   file { '/etc/prometheus/servers_wireguard.yml':
     ensure  => file,
-    content => template('prometheus/servers_wireguard.yml'),
+    content => template('prometheus/servers_wireguard.yml.erb'),
+    require => Package['prometheus'],
+    notify  => Service['prometheus'],
+  }
+
+  file { '/etc/prometheus/servers_systemd.yml':
+    ensure  => file,
+    content => template('prometheus/servers_systemd.yml.erb'),
     require => Package['prometheus'],
     notify  => Service['prometheus'],
   }

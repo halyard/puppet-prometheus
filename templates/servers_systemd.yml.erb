@@ -1,0 +1,9 @@
+<% targets = scope.call_function('configvault_list', ['prometheus/systemd']) -%>
+<% if targets.empty? -%>
+- targets: []
+<% else -%>
+- targets:
+<% targets.each do |target| -%>
+  - <%= scope.call_function('configvault_read', ['prometheus/systemd', true, 'FAIL', target]) %>:9558
+<% end -%>
+<% end -%>
