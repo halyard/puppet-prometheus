@@ -67,5 +67,4 @@ class prometheus::server (
     ensure => running,
     enable => true,
   }
-
 }
