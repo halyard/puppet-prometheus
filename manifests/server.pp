@@ -70,7 +70,12 @@ class prometheus::server (
 
   package { 'prometheus-blackbox-exporter': }
 
-  -> service { 'prometheus-blackbox-exporter':
+  -> file { '/etc/prometheus/blackbox.yml':
+    ensure => file,
+    source => 'puppet:///modules/prometheus/blackbox.yml',
+  }
+
+  ~> service { 'prometheus-blackbox-exporter':
     ensure => running,
     enable => true,
   }
