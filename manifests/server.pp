@@ -60,4 +60,12 @@ class prometheus::server (
       'grafana'  => $grafana_password,
     },
   }
+
+  package { 'prometheus-blackbox-exporter': }
+
+  -> service { 'prometheus-blackbox-exporter':
+    ensure => running,
+    enable => true,
+  }
+
 }

@@ -1,0 +1,15 @@
+<% targets = scope.call_function('configvault_list', ['prometheus/blackbox/http']) -%>
+<% if targets.empty? -%>
+- targets: []
+<% else -%>
+<% targets.each do |target| -%>
+<% urlstring = scope.call_function('configvault_read', ['prometheus/wireguard', true, '', target]) -%>
+<% urls = urlstring.empty? ? [] : urlstring.split("\n") -%>
+- targets:
+<% urls.each do |url| -%>
+    - <%= url %>
+<% end -%>
+  labels:
+    nodename: <%= target %>
+<% end -%>
+<% end -%>
