@@ -1,0 +1,9 @@
+<% targets = scope.call_function('configvault_list', ['prometheus/wireguard']) -%>
+<% if targets.empty? -%>
+- targets: []
+<% else -%>
+- targets:
+<% targets.each do |target| -%>
+  - <%= scope.call_function('configvault_read', ['prometheus/wireguard', true, 'FAIL', target]) %>:9586
+<% end -%>
+<% end -%>

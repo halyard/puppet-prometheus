@@ -33,6 +33,13 @@ class prometheus::server (
     notify  => Service['prometheus'],
   }
 
+  file { '/etc/prometheus/servers_wireguard.yml':
+    ensure  => file,
+    content => template('prometheus/servers_wireguard.yml'),
+    require => Package['prometheus'],
+    notify  => Service['prometheus'],
+  }
+
   service { 'prometheus':
     ensure => running,
     enable => true,

@@ -11,3 +11,7 @@ scrape_configs:
     file_sd_configs:
       - files:
         - /etc/prometheus/servers_node.yml
+  - job_name: wireguard
+    file_sd_configs:
+      - files:
+        - /etc/prometheus/servers_wireguard.yml
