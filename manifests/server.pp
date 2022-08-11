@@ -47,6 +47,13 @@ class prometheus::server (
     notify  => Service['prometheus'],
   }
 
+  file { '/etc/prometheus/blackbox_http.yml':
+    ensure  => file,
+    content => template('prometheus/blackbox_http.yml.erb'),
+    require => Package['prometheus'],
+    notify  => Service['prometheus'],
+  }
+
   service { 'prometheus':
     ensure => running,
     enable => true,
