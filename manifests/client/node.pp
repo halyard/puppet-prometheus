@@ -5,7 +5,17 @@ class prometheus::client::node {
 
   package { 'prometheus-node-exporter': }
 
-  -> service { 'prometheus-node-exporter':
+  -> file { '/etc/conf.d/prometheus-node-exporter':
+    ensure  => file,
+    content => 'NODE_EXPORTER_ARGS="--collector.textfile.directory=/var/lib/node-exporter"',
+    notify  => Service['prometheus-node-exporter'],
+  }
+
+  -> file { '/var/lib/node-exporter':
+    ensure => directory,
+  }
+
+  ~> service { 'prometheus-node-exporter':
     ensure => running,
     enable => true,
   }

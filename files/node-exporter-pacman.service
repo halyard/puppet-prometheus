@@ -1,0 +1,6 @@
+[Unit]
+Description=Run pacman metrics checkin
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/node-exporter-pacman.sh

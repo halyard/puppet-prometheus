@@ -1,0 +1,9 @@
+[Unit]
+Description=Schedule pacman metric checkins
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=600
+
+[Install]
+WantedBy=multi-user.target
