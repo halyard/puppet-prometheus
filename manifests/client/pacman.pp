@@ -3,8 +3,6 @@
 class prometheus::client::pacman {
   include prometheus::client::node
 
-  package { 'pacman-contrib': }
-
   file { '/usr/local/bin/node-exporter-pacman.sh':
     ensure => file,
     source => 'puppet:///modules/prometheus/node-exporter-pacman.sh',
