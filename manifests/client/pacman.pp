@@ -20,7 +20,7 @@ class prometheus::client::pacman {
 
   file { '/etc/systemd/system/node-exporter-pacman.timer':
     ensure => 'file',
-    source => 'puppet:///modules/prometheus/node-exporter-pacman.timer.erb',
+    source => 'puppet:///modules/prometheus/node-exporter-pacman.timer',
     notify => Service['node-exporter-pacman.timer'],
   }
 
