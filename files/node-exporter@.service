@@ -1,0 +1,6 @@
+[Unit]
+Description=Run $i textfile metrics exporter
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/node-exporter-%i.sh

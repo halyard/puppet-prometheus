@@ -8,9 +8,12 @@ updates="$(/usr/bin/pacman -Qu | wc -l)"
 date="$(date '+%s')"
 
 cat << EOF > /var/lib/node-exporter/pacman.prom.tmp
-# HELP updates_pending number of pending updates from pacman
-# TYPE updates_pending gauge
+# HELP pacman_updates_pending number of pending updates from pacman
+# TYPE pacman_updates_pending gauge
 pacman_updates_pending $updates
+pacman_update_check $date
+# HELP pacman_update_check time of last update check"
+# TYPE pacman_update_check gauge
 pacman_update_check $date
 EOF
 
