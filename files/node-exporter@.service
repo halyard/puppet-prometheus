@@ -1,5 +1,5 @@
 [Unit]
-Description=Run $i textfile metrics exporter
+Description=Run %i textfile metrics exporter
 
 [Service]
 Type=simple
