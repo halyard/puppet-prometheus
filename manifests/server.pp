@@ -92,12 +92,12 @@ class prometheus::server (
 
   if $backup_target != '' {
     backup::repo { 'prometheus':
-      source         => '/var/lib/prometheus',
-      target         => $backup_target,
-      watchdog_url   => $backup_watchdog,
-      password       => $backup_password,
-      environment    => $backup_environment,
-      rclone_options => $backup_rclone,
+      source        => '/var/lib/prometheus',
+      target        => $backup_target,
+      watchdog_url  => $backup_watchdog,
+      password      => $backup_password,
+      environment   => $backup_environment,
+      rclone_config => $backup_rclone,
     }
   }
 }
