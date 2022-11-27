@@ -3,6 +3,7 @@
 # @param hostname is the hostname for metrics reading
 # @param tls_account is the account details for requesting the TLS cert
 # @param grafana_password is the password for grafana to access metrics
+# @param retention sets the retention window for local metrics
 # @param tls_challengealias is the domain to use for TLS cert validation
 # @param backup_target sets the target repo for backups
 # @param backup_watchdog sets the watchdog URL to confirm backups are working
@@ -13,6 +14,7 @@ class prometheus::server (
   String $hostname,
   String $tls_account,
   String $grafana_password,
+  String $retention = '15d',
   Optional[String] $tls_challengealias = undef,
   Optional[String] $backup_target = undef,
   Optional[String] $backup_watchdog = undef,
@@ -24,7 +26,7 @@ class prometheus::server (
 
   file { '/etc/conf.d/prometheus':
     ensure  => file,
-    source  => 'puppet:///modules/prometheus/conf',
+    content => template('prometheus/conf.erb'),
     require => Package['prometheus'],
     notify  => Service['prometheus'],
   }
