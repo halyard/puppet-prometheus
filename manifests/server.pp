@@ -4,7 +4,7 @@
 # @param tls_account is the account details for requesting the TLS cert
 # @param grafana_password is the password for grafana to access metrics
 # @param retention sets the retention window for local metrics
-# @param static_targets is a hash of static_config targets
+# @param targets is an array of hashes of metrics targets
 # @param tls_challengealias is the domain to use for TLS cert validation
 # @param backup_target sets the target repo for backups
 # @param backup_watchdog sets the watchdog URL to confirm backups are working
@@ -16,7 +16,7 @@ class prometheus::server (
   String $tls_account,
   String $grafana_password,
   String $retention = '15d',
-  Hash[String, Array[String]] $static_targets = {},
+  Array[Hash] $targets = {},
   Optional[String] $tls_challengealias = undef,
   Optional[String] $backup_target = undef,
   Optional[String] $backup_watchdog = undef,
