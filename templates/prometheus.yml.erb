@@ -33,6 +33,4 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 127.0.0.1:9115
-<% if @targets.size != 0 -%>
-<%= YAML.dump(@targets, :indentation => 2) %>
-<% end -%>
+<%= @targets.to_yaml.lines[1..].map { |x| "  " + x }.join('') -%>
