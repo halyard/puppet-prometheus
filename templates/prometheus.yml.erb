@@ -33,3 +33,11 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: 127.0.0.1:9115
+<% @static_targets.each do |name, targets| -%>
+  - job_name: <%= name %>
+    static_configs:
+      - targets:
+<% targets.each do |target| -%>
+        - <%= target %>
+<% end -%>
+<% end -%>
