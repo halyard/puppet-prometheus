@@ -1,11 +1,12 @@
 # @summary Install Prometheus server
 #
 # @param hostname is the hostname for metrics reading
-# @param tls_account is the account details for requesting the TLS cert
 # @param grafana_password is the password for grafana to access metrics
+# @param aws_access_key_id sets the AWS key to use for Route53 challenge
+# @param aws_secret_access_key sets the AWS secret key to use for the Route53 challenge
+# @param email sets the contact address for the certificate
 # @param retention sets the retention window for local metrics
 # @param targets is an array of hashes of metrics targets
-# @param tls_challengealias is the domain to use for TLS cert validation
 # @param backup_target sets the target repo for backups
 # @param backup_watchdog sets the watchdog URL to confirm backups are working
 # @param backup_password sets the encryption key for backup snapshots
@@ -13,11 +14,12 @@
 # @param backup_rclone sets the config for an rclone backend
 class prometheus::server (
   String $hostname,
-  String $tls_account,
   String $grafana_password,
+  String $aws_access_key_id,
+  String $aws_secret_access_key,
+  String $email,
   String $retention = '15d',
   Array[Hash] $targets = {},
-  Optional[String] $tls_challengealias = undef,
   Optional[String] $backup_target = undef,
   Optional[String] $backup_watchdog = undef,
   Optional[String] $backup_password = undef,
@@ -74,10 +76,11 @@ class prometheus::server (
   }
 
   nginx::site { $hostname:
-    proxy_target       => 'http://localhost:9090',
-    tls_challengealias => $tls_challengealias,
-    tls_account        => $tls_account,
-    users              => {
+    proxy_target          => 'http://localhost:9090',
+    aws_access_key_id     => $aws_access_key_id,
+    aws_secret_access_key => $aws_secret_access_key,
+    email                 => $email,
+    users                 => {
       'grafana'  => $grafana_password,
     },
   }
