@@ -92,6 +92,11 @@ class prometheus::server (
     source => 'puppet:///modules/prometheus/blackbox.yml',
   }
 
+  -> file { '/etc/systemd/system/prometheus-blackbox-exporter.service.d/override.conf':
+    ensure => file,
+    source => 'puppet:///modules/prometheus/blackbox-override.conf',
+  }
+
   ~> service { 'prometheus-blackbox-exporter':
     ensure => running,
     enable => true,
